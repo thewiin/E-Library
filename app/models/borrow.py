@@ -1,0 +1,16 @@
+from datetime import date
+from app import db
+
+
+class BorrowRecord(db.Model):
+    __tablename__ = "borrow_records"
+
+    id = db.Column(db.Integer, primary_key=True)
+    borrow_date = db.Column(db.Date, default=date.today)
+    due_date = db.Column(db.Date, nullable=False)
+
+    reader_id = db.Column(db.Integer, db.ForeignKey("readers.id"), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey("books.id"), nullable=False)
+
+    reader = db.relationship("Reader", back_populates="borrow_records")
+    book = db.relationship("Book", back_populates="borrow_records")
