@@ -18,4 +18,6 @@ def create_app():
     migrate.init_app(app, db)
     ma.init_app(app)
 
+    from app import models
+
     return app

@@ -12,5 +12,15 @@ class Comment(db.Model):
     reader_id = db.Column(db.Integer, db.ForeignKey("readers.id"), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey("books.id"), nullable=False)
 
+    # Quan hệ
     reader = db.relationship("Reader", back_populates="comments")
     book = db.relationship("Book", back_populates="comments")
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "content": self.content,
+            "created_at": str(self.created_at),
+            "reader_id": self.reader_id,
+            "book_id": self.book_id
+        }
