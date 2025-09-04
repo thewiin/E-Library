@@ -33,9 +33,6 @@ class Book(db.Model):
             "description": self.description,
             "image": self.image,
             "so_luong": self.so_luong,
-            "publisher": self.publisher,
-            "published_year": self.published_year,
-            "isbn": self.isbn,
             "created_date": str(self.created_date),
             "updated_date": str(self.updated_date) if self.updated_date else None,
 

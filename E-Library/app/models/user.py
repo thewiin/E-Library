@@ -20,8 +20,8 @@ class User(db.Model):
     updated_date = db.Column(db.DateTime, onupdate=func.now())
 
     # Quan hệ 1-1
-    reader = db.relationship("Reader", back_populates="user", uselist=False)
-    admin = db.relationship("Admin", back_populates="user", uselist=False)
+    reader = db.relationship("Reader", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    admin = db.relationship("Admin", back_populates="user", uselist=False, cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
