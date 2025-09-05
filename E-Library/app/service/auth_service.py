@@ -1,9 +1,8 @@
-import jwt
-from datetime import datetime, timedelta
-from flask import current_app
+from flask_jwt_extended import create_access_token
 from app.extensions import bcrypt
 from app.models import User
 from app.repository.user_repository import UserRepository
+
 
 class AuthService:
     @staticmethod
@@ -27,10 +26,7 @@ class AuthService:
     def login(email, password):
         user = UserRepository.get_by_email(email)
         if user and bcrypt.check_password_hash(user.password, password):
-            payload = {
-                "user_id": user.id,
-                "exp": datetime.utcnow() + timedelta(hours=1)
-            }
-            token = jwt.encode(payload, current_app.config["SECRET_KEY"], algorithm="HS256")
-            return token
-        return None
+            # identity có thể là user.id hoặc dict (id, role,...)
+            token = create_access_token(identity=user.jwt_identity())
+            return token, user
+        return None, None
