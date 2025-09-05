@@ -1,6 +1,6 @@
 from flask import Flask
 from flask.cli import load_dotenv
-from app.extensions import db, bcrypt, ma, migrate
+from app.extensions import db, bcrypt, ma, migrate, jwt
 from app.route.auth_route import auth_bp
 from app.route.book_route import book_bp
 
@@ -13,6 +13,7 @@ def create_app():
     bcrypt.init_app(app)
     ma.init_app(app)
     migrate.init_app(app, db)
+    jwt.init_app(app)
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(book_bp, url_prefix="/api/books")
