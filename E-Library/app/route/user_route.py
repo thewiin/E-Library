@@ -5,6 +5,8 @@ from app.models import User
 from flask import current_app
 import jwt
 
+from app.service.auth_service import AuthService
+
 auth_bp = Blueprint('auth', __name__)
 
 # decorator kiểm tra token
@@ -40,7 +42,7 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
-    token = AuthService.login(data['email'], data['password'])
+    token, _ = AuthService.login(data['email'], data['password'])
     if token:
         return jsonify({'token': token})
     return jsonify({'message': 'Sai email hoặc mật khẩu'}), 401

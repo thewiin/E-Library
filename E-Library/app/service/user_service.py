@@ -1,32 +1,33 @@
+# app/service/user_service.py
+from app.repository.user_repository import UserRepository
 from app.models import User
-from app.extensions import db, bcrypt
-from flask import current_app
-import jwt, datetime
 
-class AuthService:
+
+class UserService:
     @staticmethod
-    def register(email, password, first_name, last_name, dob=None, gender=None, role=None):
-        hashed_pw = bcrypt.generate_password_hash(password).decode('utf-8')
-        user = User(
-            email=email,
-            password=hashed_pw,
-            first_name=first_name,
-            last_name=last_name,
-            dob=dob,
-            gender=gender,
-            role=role
-        )
-        db.session.add(user)
-        db.session.commit()
-        return user
+    def get_user(user_id: int) -> User | None:
+        return UserRepository.get_by_id(user_id)
 
     @staticmethod
-    def login(email, password):
-        user = User.query.filter_by(email=email).first()
-        if user and bcrypt.check_password_hash(user.password, password):
-            token = jwt.encode({
-                'user_id': user.id,
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1)
-            }, current_app.config['SECRET_KEY'], algorithm='HS256')
-            return token
-        return None
+    def get_all_users() -> list[User]:
+        return UserRepository.get_all()
+
+    @staticmethod
+    def update_user(user_id: int, **kwargs) -> User | None:
+        user = UserRepository.get_by_id(user_id)
+        if not user:
+            return None
+
+        for key, value in kwargs.items():
+            if hasattr(user, key) and value is not None:
+                setattr(user, key, value)
+
+        return UserRepository.save(user)
+
+    @staticmethod
+    def delete_user(user_id: int) -> bool:
+        user = UserRepository.get_by_id(user_id)
+        if not user:
+            return False
+        UserRepository.delete(user)
+        return True
