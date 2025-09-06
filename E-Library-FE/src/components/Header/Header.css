@@ -1,0 +1,89 @@
+.app-header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 0 40px; /* Căn lề padding giống với trang chi tiết sách */
+    width: 100%;
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    height: 72px; /* Chiều cao cố định cho header */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.hamburger-icon {
+    cursor: pointer;
+    color: #333;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #212529;
+    white-space: nowrap;
+}
+
+.header-nav {
+    margin-left: auto; 
+}   
+
+.header-nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 40px; /* Khoảng cách giữa các mục menu */
+}
+
+.header-nav a {
+    text-decoration: none;
+    color: #495057;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 0;
+    transition: color 0.2s ease-in-out;
+}
+
+.header-nav a:hover {
+    color: #0d6efd; /* Màu xanh khi hover */
+}
+
+.header-right {
+    margin-left: 40px;
+}
+
+.my-account-btn {
+    background-color: #e7f1ff; /* Màu nền xanh nhạt như trong ảnh */
+    color: #0d6efd;
+    border: 1px solid #a9cfff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.my-account-btn:hover {
+    background-color: #d0e3ff;
+}
+
+.link-style-button {
+    background: none;
+    border: none;
+    color: #495057;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+}
+.link-style-button:hover {
+    color: #0d6efd;
+}

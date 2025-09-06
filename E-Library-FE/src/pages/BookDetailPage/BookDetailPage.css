@@ -1,0 +1,24 @@
+.book-detail-page-layout {
+    display: flex;
+    padding: 40px;
+    gap: 30px;
+    background-color: #f8f9fa;
+}
+
+/* Cột thông tin sách (cột trái) */
+.book-info-column {
+    /* Sử dụng flex-basis để nó không bị co lại quá mức */
+    flex: 0 0 450px; 
+}
+
+/* Cột bình luận (cột phải) */
+.rate-comment-column {
+    flex: 1; /* Chiếm hết phần không gian còn lại */
+}
+
+/* Bỏ shadow và padding của BookDetails vì layout đã có */
+.book-info-column .details-container {
+    padding: 0;
+    box-shadow: none;
+    background-color: transparent;
+}
