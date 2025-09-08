@@ -7,7 +7,6 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/Auth/SignUp'; // Giả sử bạn có trang SignUp
 import BookDetailPage from './pages/BookDetailPage/BookDetailPage';
 import RateAndCommentPage from './pages/RateAndCommentPage/RateAndCommentPage';
-import './App.css'; 
 
 function App() {
   return (

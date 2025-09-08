@@ -1,14 +1,13 @@
 /* src/pages/LoginPage.css */
 
+.login-page-container {
+    background-color: #fafcfd;
+    min-height: 100vh;
+}
+
 .login-page {
-    display: flex;
-    flex-direction: column; /* Sắp xếp theo cột: logo trên, form + ảnh dưới */
-    align-items: center; /* Căn giữa theo chiều ngang */
-    justify-content: center;
-    min-height: 100vh; /* Chiếm toàn bộ chiều cao màn hình */
-    background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
-    padding: 20px;
-    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+    margin-inline: auto;
+    max-width: 85%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -16,42 +15,34 @@
 .login-header-logo {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 40px; /* Khoảng cách với phần nội dung chính */
-    margin-top: 50px; /* Khoảng cách từ đỉnh */
-    color: #343a40;
+    gap: 35px;
+    padding-block: 40px;
+    color: #404040;
 }
 
 .book-icon {
-    width: 1cm; 
+    width: 3cm; 
     height: auto; 
 }
 
 .app-title {
-    font-size: 32px;
+    font-size: 48px;
     font-weight: 700;
     margin: 0;
-    letter-spacing: 1px;
+    letter-spacing: 5px;
 }
 
 /* Container chính của Form và Ảnh minh họa */
 .login-content-wrapper {
     display: flex;
     align-items: center;
-    gap: 60px; /* Khoảng cách giữa form và ảnh */
-    background-color: #ffffff;
-    padding: 50px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    /* Giữ max-width để toàn bộ khối vẫn nằm trong giới hạn */
-    max-width: 900px; 
-    width: 100%; 
-    box-sizing: border-box;
+    width: 100%;
 }
 
 /* Form Container */
 .login-form-container {
-    flex: 0 0 400px;
+    flex: 0 0 60%;
 }
 
 /* Tiêu đề "Login" trong form */
@@ -113,7 +104,7 @@
 
 /* Phần "Don't have an account?" */
 .login-signup-text,
-.auth-form p { /* Nếu AuthForm của bạn có p footer */
+.auth-form p {
     text-align: center;
     margin-top: 25px;
     font-size: 15px;
@@ -122,7 +113,7 @@
 
 .login-signup-text a,
 .auth-form p a {
-    color: #6a8cff; /* Màu xanh của link */
+    color: #6a8cff;
     text-decoration: none;
     font-weight: 600;
 }
@@ -134,17 +125,18 @@
 
 /* Container ảnh minh họa */
 .login-illustration-container {
-    flex: 1; /* Cho phép phần này chiếm không gian còn lại */
+    flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .login-illustration-image {
-    max-width: 350px; 
+    max-width: 450px; 
     width: 100%; 
     height: auto;
     display: block;
+    pointer-events: none;
+    user-select: none;
 }
 
 .auth-form {
