@@ -20,20 +20,38 @@ const Login = () => {
   };
 
   return (
-    <div className="login-page"> {/* Đổi tên class để dễ quản lý CSS riêng */}
-      <div className="login-header-logo"> {/* Header logo trên cùng */}
-          <img src="../../assets/library-icon1.jpg" alt="Book Icon" className="book-icon" />
+    <div className="login-page">
+      {" "}
+      {/* Đổi tên class để dễ quản lý CSS riêng */}
+      <div className="login-header-logo">
+        {" "}
+        <img
+          src="/images/logo.png"
+          alt="Book Icon"
+          className="book-icon"
+        />
         <h1 className="app-title">LIBRARY MANAGEMENT</h1>
       </div>
-
-      <div className="login-content-wrapper"> {/* Container chứa form và ảnh minh họa */}
+      <div className="login-content-wrapper">
+        {" "}
+        {/* Container chứa form và ảnh minh họa */}
         <div className="login-form-container">
           {/* Thay thế AuthForm bằng cấu trúc trực tiếp nếu muốn kiểm soát hoàn toàn giao diện */}
           <AuthForm
             title="Login"
             fields={[
-              { label: "Email", type: "email", value: email, onChange: setEmail },
-              { label: "Password", type: "password", value: password, onChange: setPassword },
+              {
+                label: "Email",
+                type: "email",
+                value: email,
+                onChange: setEmail,
+              },
+              {
+                label: "Password",
+                type: "password",
+                value: password,
+                onChange: setPassword,
+              },
             ]}
             onSubmit={handleSubmit}
             footer={
@@ -43,9 +61,12 @@ const Login = () => {
             }
           />
         </div>
-        
         <div className="login-illustration-container">
-          <img src="../../assets/library-icon2.jpg" alt="Login Illustration" className="login-illustration-image" />
+          <img
+            src="images/loginImage.png"
+            alt="Login Illustration"
+            className="login-illustration-image"
+          />
         </div>
       </div>
     </div>
