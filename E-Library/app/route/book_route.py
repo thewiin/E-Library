@@ -4,11 +4,28 @@ from app.utils.decorators import token_required
 
 book_bp = Blueprint("book", __name__)
 
+
 # Không cần xác thực
 @book_bp.route("/", methods=["GET"])
 def get_books():
-    books = BookService.get_books()
-    return jsonify([b.to_dict() for b in books])
+    filters = {
+        "q": request.args.get("q"),
+        "author": request.args.get("author"),
+        "category_id": request.args.get("category_id", type=int),
+        "page": request.args.get("page", default=1, type=int),
+        "per_page": request.args.get("per_page", default=10, type=int),
+    }
+
+    result = BookService.get_books(filters)
+
+    return jsonify({
+        "books": [book.to_dict() for book in result["items"]],
+        "total": result["total"],
+        "page": result["page"],
+        "per_page": result["per_page"],
+        "pages": result["pages"]
+    })
+
 
 @book_bp.route("/<int:book_id>", methods=["GET"])
 def get_book(book_id):
@@ -16,6 +33,7 @@ def get_book(book_id):
     if not book:
         return jsonify({"message": "Book not found"}), 404
     return jsonify(book.to_dict())
+
 
 # Cần xác thực
 @book_bp.route("/", methods=["POST"])
@@ -35,6 +53,7 @@ def create_book(current_user):
     )
     return jsonify(book.to_dict()), 201
 
+
 @book_bp.route("/<int:book_id>", methods=["PUT"])
 @token_required
 def update_book(current_user, book_id):
@@ -43,6 +62,7 @@ def update_book(current_user, book_id):
     if not book:
         return jsonify({"message": "Book not found"}), 404
     return jsonify(book.to_dict())
+
 
 @book_bp.route("/<int:book_id>", methods=["DELETE"])
 @token_required

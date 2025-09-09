@@ -1,10 +1,11 @@
 from app.models import Book
 from app.repository.book_repository import BookRepository
 
+
 class BookService:
     @staticmethod
-    def get_books():
-        return BookRepository.get_all()
+    def get_books(filters=None):
+        return BookRepository.get_books(filters)
 
     @staticmethod
     def get_book(book_id):
