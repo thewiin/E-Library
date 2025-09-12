@@ -1,21 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import AuthForm from "../../components/AuthForm"; // Giữ nguyên AuthForm nếu bạn đang sử dụng nó
-import { login } from "../../services/authService";
+import { Link, useNavigate } from "react-router-dom";
+import API, { endpoints } from "../../services/Apis.js"; // Đảm bảo đường dẫn này đúng
+import cookie from "react-cookies";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Reset lỗi mỗi khi submit
+
     try {
-      const res = await login(email, password);
-      // Giả sử có chức năng chuyển hướng sau khi đăng nhập thành công
-      // navigate('/books/some-default-book-id');
-      alert("Login success: " + JSON.stringify(res));
+      // 2. Gọi API trực tiếp, không cần validation bằng JS
+      const res = await API.post(endpoints["login"], {
+        email: email,
+        password: password,
+      });
+
+      cookie.save("token", res.data.token);
+      navigate("/");
+
     } catch (err) {
-      alert(err.message || "Login failed");
+      console.error("Lỗi đăng nhập:", err);
+      // 3. Cập nhật một lỗi duy nhất
+      setError("Email hoặc mật khẩu không chính xác.");
     }
   };
 
@@ -32,34 +43,50 @@ const Login = () => {
         />
         <h1 className="app-title">LIBRARY MANAGEMENT</h1>
       </div>
-      <div className="login-content-wrapper">
-        {" "}
-        {/* Container chứa form và ảnh minh họa */}
-        <div className="login-form-container">
-          {/* Thay thế AuthForm bằng cấu trúc trực tiếp nếu muốn kiểm soát hoàn toàn giao diện */}
-          <AuthForm
-            title="Login"
-            fields={[
-              {
-                label: "Email",
-                type: "email",
-                value: email,
-                onChange: setEmail,
-              },
-              {
-                label: "Password",
-                type: "password",
-                value: password,
-                onChange: setPassword,
-              },
-            ]}
-            onSubmit={handleSubmit}
-            footer={
+
+      <div className="layout-wrapper-2-columns">
+        
+        {/* Cột 1: Form */}
+        <div className="auth-form-container">
+          {/* 4. Xây dựng form trực tiếp, bỏ AuthForm */}
+          <form onSubmit={handleSubmit}>
+            <h2 className="form-title">Login</h2>
+            
+            {/* Hiển thị lỗi duy nhất */}
+            {error && <p className="error-message api-error">{error}</p>}
+
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                type="email" 
+                id="email" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email" 
+                required // Sử dụng validation của trình duyệt
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password" 
+                id="password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password" 
+                required // Sử dụng validation của trình duyệt
+              />
+            </div>
+
+            <button type="submit" className="submit-button">Login</button>
+            
+            <div className="form-footer">
               <p>
                 Don’t have an account? <Link to="/signup">Sign up</Link>
               </p>
-            }
-          />
+            </div>
+          </form>
         </div>
         <div className="login-illustration-container">
           <img
