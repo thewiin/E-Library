@@ -1,15 +1,18 @@
 .app-header {
-    background-color: #ffffff;
+    position: sticky; 
+    top: 0;          
+    z-index: 1000;   
+    background-color: #d8e6ff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    padding: 0 40px; /* Căn lề padding giống với trang chi tiết sách */
+    padding: 0 40px;
     width: 100%;
-    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+    box-sizing: border-box;
 }
 
 .header-container {
     display: flex;
     align-items: center;
-    height: 72px; /* Chiều cao cố định cho header */
+    height: 72px; 
 }
 
 .header-left {
@@ -40,7 +43,7 @@
     display: flex;
     margin: 0;
     padding: 0;
-    gap: 40px; /* Khoảng cách giữa các mục menu */
+    gap: 40px;
 }
 
 .header-nav a {
@@ -61,8 +64,8 @@
 }
 
 .my-account-btn {
-    background-color: #e7f1ff; /* Màu nền xanh nhạt như trong ảnh */
-    color: #0d6efd;
+    background-color: #6a8cff; 
+    color: #ffffff;
     border: 1px solid #a9cfff;
     padding: 10px 20px;
     font-size: 16px;
@@ -73,7 +76,7 @@
 }
 
 .my-account-btn:hover {
-    background-color: #d0e3ff;
+    background-color: #a8a9ff;
 }
 
 .link-style-button {
