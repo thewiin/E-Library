@@ -1,159 +1,140 @@
-.rate-comment-section {
-    flex: 1;
-    padding-left: 30px;
+.rate-comment-container {
+    background-color: #ffffff;
+    padding: 32px;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-.section-title {
-    font-size: 28px;
+/* --- Form Đánh Giá --- */
+.rate-form-section h2 {
+    font-size: 24px;
     font-weight: 600;
-    margin-bottom: 24px;
-    color: #212529;
+    margin: 0 0 24px 0;
 }
-
-/* --- Phần đánh giá --- */
-.give-rating-box {
-    margin-bottom: 40px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid #dee2e6;
-}
-
-.rating-input-area {
+.rating-input-group {
     display: flex;
     align-items: center;
     gap: 16px;
     margin-bottom: 16px;
 }
-
-.rating-label {
+.rating-input-group label {
     font-size: 16px;
     color: #495057;
 }
-
-.stars-interactive .lucide-star {
+.stars-input > svg {
+    font-size: 22px;
+    color: #ffc107;
     cursor: pointer;
+    transition: transform 0.1s;
 }
-
-.comment-textarea {
+.stars-input > svg:hover {
+    transform: scale(1.2);
+}
+.rate-comment-container textarea {
     width: 100%;
     min-height: 100px;
     padding: 12px;
-    border-radius: 8px;
     border: 1px solid #ced4da;
+    border-radius: 6px;
     font-size: 16px;
+    font-family: inherit;
     resize: vertical;
     box-sizing: border-box;
 }
-
-.action-buttons-comment {
+.form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
     margin-top: 16px;
 }
 
-.btn-cancel {
-    background-color: #f8f9fa;
-    color: #212529;
-    border: 1px solid #ced4da;
+/* --- Danh sách bình luận --- */
+.divider {
+    border: none;
+    height: 1px;
+    background-color: #e9ecef;
+    margin: 32px 0;
 }
-.btn-send {
-    background-color: #0d6efd;
-    color: white;
-}
-
-/* --- Phần danh sách bình luận --- */
-.all-comments-section {
-}
-
 .comments-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
-
-.comments-title {
-    font-size: 22px;
+.comments-header h3 {
+    font-size: 20px;
+    font-weight: 600;
     margin: 0;
 }
-
-.filter-buttons {
-    display: flex;
-    gap: 8px;
-}
-
 .filter-btn {
-    padding: 8px 16px;
+    background: none;
     border: 1px solid #ced4da;
-    background-color: #fff;
     border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 14px;
     cursor: pointer;
+    transition: all 0.2s;
 }
-.filter-btn.active {
+.filter-btn.active, .filter-btn:hover {
     background-color: #e7f1ff;
     color: #0d6efd;
     border-color: #a9cfff;
 }
-
-/* --- Thẻ bình luận --- */
-.comment-card {
+.comment-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+.comment-item:last-child {
+    border-bottom: none;
+}
+.comment-author-info {
     display: flex;
-    gap: 16px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 12px;
-    margin-bottom: 16px;
-}
-
-.comment-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-}
-
-.comment-content {
-    flex: 1;
-}
-
-.comment-info {
-    display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 12px;
-    margin-bottom: 4px;
-}
-
-.comment-user {
-    font-weight: 600;
-}
-
-.comment-time {
-    font-size: 14px;
-    color: #6c757d;
-}
-
-.comment-rating {
     margin-bottom: 8px;
 }
-
-.comment-text {
-    margin: 0 0 12px 0;
-    color: #343a40;
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
 }
-
-.comment-actions {
+.user-details {
     display: flex;
-    gap: 16px;
+    flex-direction: column;
+}
+.username {
+    font-weight: 600;
+    color: #212529;
+}
+.timestamp {
+    font-size: 14px;
+    color: #6c757d;
+}
+.comment-rating {
+    margin-bottom: 12px;
+    color: #ffc107;
+}
+.comment-text {
+    color: #343a40;
+    line-height: 1.6;
+    margin: 0 0 12px 0;
 }
 
-.action-link {
+.comment-actions .action-button {
     background: none;
     border: none;
-    color: #6c757d;
-    cursor: pointer;
     padding: 0;
+    text-decoration: none;
+    color: #495057;
     font-size: 14px;
+    font-weight: 500;
+    margin-right: 16px;
+    cursor: pointer; 
+    font-family: inherit; 
 }
 
-.action-link:hover {
-    text-decoration: underline;
+.comment-actions .action-button:hover {
+    color: #0d6efd;
 }

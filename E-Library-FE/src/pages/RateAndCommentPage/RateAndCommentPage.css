@@ -1,15 +1,16 @@
 .rate-comment-page-layout {
     display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 40px;
-    gap: 30px;
-    align-items: flex-start; /* Căn các cột theo đỉnh */
 }
 
 .book-summary-column {
-    flex: 0 0 450px;
+    flex: 0 0 400px; 
 }
 
 .comment-section-column {
-    flex: 1;
-    min-width: 0;
+    flex-grow: 1; 
 }
