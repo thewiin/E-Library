@@ -1,0 +1,159 @@
+.rate-comment-section {
+    flex: 1;
+    padding-left: 30px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #212529;
+}
+
+/* --- Phần đánh giá --- */
+.give-rating-box {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.rating-input-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.rating-label {
+    font-size: 16px;
+    color: #495057;
+}
+
+.stars-interactive .lucide-star {
+    cursor: pointer;
+}
+
+.comment-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.action-buttons-comment {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.btn-cancel {
+    background-color: #f8f9fa;
+    color: #212529;
+    border: 1px solid #ced4da;
+}
+.btn-send {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* --- Phần danh sách bình luận --- */
+.all-comments-section {
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.comments-title {
+    font-size: 22px;
+    margin: 0;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.filter-btn.active {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+    border-color: #a9cfff;
+}
+
+/* --- Thẻ bình luận --- */
+.comment-card {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.comment-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-info {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.comment-user {
+    font-weight: 600;
+}
+
+.comment-time {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.comment-rating {
+    margin-bottom: 8px;
+}
+
+.comment-text {
+    margin: 0 0 12px 0;
+    color: #343a40;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.action-link {
+    background: none;
+    border: none;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}

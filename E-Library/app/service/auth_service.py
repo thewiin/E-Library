@@ -1,16 +1,30 @@
 from flask_jwt_extended import create_access_token
 from app.extensions import bcrypt
-from app.models import User
+from app.models import User, Reader, Admin
+from app.models.enums import RoleEnum
+from app.repository.admin_repository import AdminRepository
+from app.repository.reader_repository import ReaderRepository
 from app.repository.user_repository import UserRepository
+import cloudinary.uploader
 
 
 class AuthService:
     @staticmethod
-    def register(email, password, first_name, last_name, dob=None, gender=None, role=None):
+    def register(email, password, first_name, last_name, dob=None, gender=None, role=None, avatar_file=None):
         if UserRepository.get_by_email(email):
             raise ValueError("Email đã tồn tại")
 
+        # Upload avatar lên Cloudinary (nếu có)
+        avatar_url = None
+        if avatar_file:
+            upload_result = cloudinary.uploader.upload(avatar_file)
+            avatar_url = upload_result.get("secure_url")
+
         hashed_pw = bcrypt.generate_password_hash(password).decode("utf-8")
+
+        # Mặc định nếu không truyền role thì là READER
+        role = RoleEnum(role) if role else RoleEnum.READER
+
         user = User(
             email=email,
             password=hashed_pw,
@@ -18,9 +32,21 @@ class AuthService:
             last_name=last_name,
             dob=dob,
             gender=gender,
-            role=role
+            role=role,
+            avatar=avatar_url
         )
-        return UserRepository.save(user)
+
+        saved_user = UserRepository.save(user)
+
+        # Tạo bản ghi phụ theo role
+        if role == RoleEnum.READER:
+            reader = Reader(user_id=saved_user.id)
+            ReaderRepository.save(reader)
+        elif role == RoleEnum.ADMIN:
+            admin = Admin(user_id=saved_user.id)
+            AdminRepository.save(admin)
+
+        return saved_user
 
     @staticmethod
     def login(email, password):

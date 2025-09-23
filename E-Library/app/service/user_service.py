@@ -1,6 +1,7 @@
 # app/service/user_service.py
 from app.repository.user_repository import UserRepository
 from app.models import User
+import cloudinary.uploader
 
 
 class UserService:
@@ -13,10 +14,14 @@ class UserService:
         return UserRepository.get_all()
 
     @staticmethod
-    def update_user(user_id: int, **kwargs) -> User | None:
+    def update_user(user_id, avatar_file=None, **kwargs):
         user = UserRepository.get_by_id(user_id)
         if not user:
             return None
+
+        if avatar_file:
+            upload_result = cloudinary.uploader.upload(avatar_file)
+            user.avatar = upload_result.get("secure_url")
 
         for key, value in kwargs.items():
             if hasattr(user, key) and value is not None:

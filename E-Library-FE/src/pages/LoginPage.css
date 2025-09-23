@@ -1,0 +1,145 @@
+/* src/pages/LoginPage.css */
+
+.login-page-container {
+    background-color: #fafcfd;
+    min-height: 100vh;
+}
+
+.login-page {
+    margin-inline: auto;
+    max-width: 85%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Header Logo (cuốn sách và chữ LIBRARY MANAGEMENT) */
+.login-header-logo {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    padding-block: 40px;
+    color: #404040;
+}
+
+.book-icon {
+    width: 3cm; 
+    height: auto; 
+}
+
+.app-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 5px;
+}
+
+/* Container chính của Form và Ảnh minh họa */
+.login-content-wrapper {
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    width: 100%;
+}
+
+/* Form Container */
+.login-form-container {
+    flex: 0 0 60%;
+}
+
+/* Tiêu đề "Login" trong form */
+.auth-form h2.login-form-title { /* Nếu AuthForm của bạn render <h2> */
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #212529;
+    text-align: left; /* Căn lề trái */
+}
+
+/* Các trường input */
+.form-group { /* Nếu AuthForm của bạn có class form-group */
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #495057;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+    color: #adb5bd;
+}
+
+/* Nút Login */
+.auth-form button.login-btn,
+.auth-form button[type="submit"] { /* Cả hai cách nếu AuthForm của bạn tạo nút */
+    width: 100%;
+    padding: 14px;
+    background-color: #6a8cff; /* Màu xanh của nút */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.auth-form button.login-btn:hover,
+.auth-form button[type="submit"]:hover {
+    background-color: #5575e7;
+}
+
+/* Phần "Don't have an account?" */
+.login-signup-text,
+.auth-form p {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 15px;
+    color: #6c757d;
+}
+
+.login-signup-text a,
+.auth-form p a {
+    color: #6a8cff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-signup-text a:hover,
+.auth-form p a:hover {
+    text-decoration: underline;
+}
+
+/* Container ảnh minh họa */
+.login-illustration-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.login-illustration-image {
+    max-width: 450px; 
+    width: 100%; 
+    height: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+}
+
+.auth-form {
+  padding: 0; /* Loại bỏ padding mặc định nếu có */
+  box-shadow: none; /* Loại bỏ shadow nếu có */
+}
