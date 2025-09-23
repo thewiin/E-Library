@@ -66,7 +66,7 @@ const Home = () => {
                   <h5 className="card-title">{book.title}</h5>
                   <p className="card-text text-muted">{book.author}</p>
                   <a href={`/books/${book.id}`} className="btn btn-outline-primary mt-auto">
-                    Details
+                    Xem chi tiết
                   </a>
                 </div>
               </div>
