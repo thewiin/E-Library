@@ -35,6 +35,21 @@ class User(db.Model):
     admin = db.relationship("Admin", back_populates="user", uselist=False, cascade="all, delete-orphan")
     librarian = db.relationship("Librarian", back_populates="user", uselist=False, cascade="all, delete-orphan")
 
+    # ----------------- PROPERTIES -----------------
+    @property
+    def borrow_records(self):
+        """Truy xuất toàn bộ mượn sách nếu user là reader"""
+        if self.reader:
+            return self.reader.borrow_records
+        return []
+
+    @property
+    def comments(self):
+        """Truy xuất toàn bộ bình luận nếu user là reader"""
+        if self.reader:
+            return self.reader.comments
+        return []
+
     # ----------------- VALIDATION / NORMALIZATION -----------------
     @validates("email")
     def _normalize_email(self, key, value):

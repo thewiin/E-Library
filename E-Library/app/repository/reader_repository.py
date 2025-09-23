@@ -1,8 +1,11 @@
-# app/repository/reader_repository.py
 from app import db
 from app.models import Reader
 
 class ReaderRepository:
+    @staticmethod
+    def get_by_id(reader_id):
+        return Reader.query.get(reader_id)
+
     @staticmethod
     def save(reader):
         db.session.add(reader)
