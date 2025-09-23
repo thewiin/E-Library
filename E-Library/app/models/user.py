@@ -56,9 +56,8 @@ class User(db.Model):
     def full_name(self) -> str:
         return f"{self.first_name} {self.last_name}".strip()
 
-    def jwt_identity(self) -> dict:
-        """Dữ liệu nhúng vào JWT (tối giản)."""
-        return {"id": self.id, "role": self.role.value if self.role else None}
+    def jwt_identity(self):
+        return str(self.id)
 
     # ----------------- SERIALIZATION -----------------
     def to_dict(self):

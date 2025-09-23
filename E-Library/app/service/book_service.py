@@ -41,17 +41,24 @@ class BookService:
         if not book:
             return None
 
+        # Validation cơ bản
+        if so_luong is not None and so_luong < 0:
+            so_luong = 0
+
         if title:
-            book.title = title
+            book.title = title.strip()
         if author:
-            book.author = author
+            book.author = author.strip()
         if description:
-            book.description = description
+            book.description = description.strip()
         if so_luong is not None:
             book.so_luong = so_luong
 
         # Upload ảnh mới
         if image_file:
+            # Kiểm tra định dạng ảnh
+            if image_file.filename == '':
+                return None  # hoặc xử lý lỗi
             upload_result = cloudinary.uploader.upload(image_file)
             book.image = upload_result.get("secure_url")
 
