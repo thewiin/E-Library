@@ -1,48 +1,32 @@
 from flask import Blueprint, request, jsonify
-from app.service import user_service
-from functools import wraps
-from app.models import User
-from flask import current_app
-import jwt
 
-from app.service.auth_service import AuthService
+from app.service.user_service import UserService
+from app.utils import token_required, roles_required
 
-auth_bp = Blueprint('auth', __name__)
+user_bp = Blueprint("user", __name__)
 
-# decorator kiểm tra token
-def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = request.headers.get('Authorization')
-        if not token:
-            return jsonify({'message': 'Token thiếu'}), 401
-        try:
-            token = token.split(" ")[1]  # Bearer <token>
-            data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
-            current_user = User.query.get(data['user_id'])
-        except:
-            return jsonify({'message': 'Token không hợp lệ'}), 401
-        return f(current_user, *args, **kwargs)
-    return decorated
+@user_bp.route("/<int:user_id>", methods=["PUT"])
+@token_required
+def update_user(current_user, user_id):
+    # Chỉ cho ADMIN hoặc chính chủ update
+    if current_user.role.value != "ADMIN" and current_user.id != user_id:
+        return jsonify({"message": "Không có quyền"}), 403
 
-@auth_bp.route('/register', methods=['POST'])
-def register():
-    data = request.get_json()
-    user = AuthService.register(
-        email=data['email'],
-        password=data['password'],
-        first_name=data['first_name'],
-        last_name=data['last_name'],
-        dob=data.get('dob'),
-        gender=data.get('gender'),
-        role=data.get('role')
+    data = request.form
+    avatar_file = request.files.get("avatar")
+
+    user = UserService.update_user(
+        user_id,
+        avatar_file=avatar_file,
+        first_name=data.get("first_name"),
+        last_name=data.get("last_name"),
+        dob=data.get("dob"),
+        gender=data.get("gender"),
+        role=data.get("role") if current_user.role.value == "ADMIN" else None,  # chỉ ADMIN mới đổi role
+        is_active=data.get("is_active") if current_user.role.value == "ADMIN" else None  # chỉ ADMIN mới đổi trạng thái
     )
-    return jsonify(user.to_dict()), 201
 
-@auth_bp.route('/login', methods=['POST'])
-def login():
-    data = request.get_json()
-    token, _ = AuthService.login(data['email'], data['password'])
-    if token:
-        return jsonify({'token': token})
-    return jsonify({'message': 'Sai email hoặc mật khẩu'}), 401
+    if not user:
+        return jsonify({"message": "User không tồn tại"}), 404
+
+    return jsonify(user.to_dict())

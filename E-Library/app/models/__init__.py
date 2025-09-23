@@ -7,6 +7,7 @@ from .book import Book
 from .borrow_record import BorrowRecord
 from .comment import Comment
 from .category import Category
+from .librarian import Librarian
 
 __all__ = [
     "User",
@@ -16,4 +17,5 @@ __all__ = [
     "BorrowRecord",
     "Comment",
     "Category",
+    "Librarian"
 ]

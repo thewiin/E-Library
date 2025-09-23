@@ -38,3 +38,15 @@ class Book(db.Model):
 
             "comments": [c.to_dict() for c in self.comments]
         }
+
+    def to_dict_basic(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "author": self.author,
+            "description": self.description,
+            "image": self.image,
+            "so_luong": self.so_luong,
+            "created_date": str(self.created_date),
+            "updated_date": str(self.updated_date) if self.updated_date else None,
+        }

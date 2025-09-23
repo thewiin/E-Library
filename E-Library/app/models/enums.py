@@ -8,6 +8,7 @@ class GenderEnum(enum.Enum):
 class RoleEnum(enum.Enum):
     ADMIN = "admin"
     READER = "reader"
+    LIBRARIAN = "librarian"
 
 class BookStatusEnum(enum.Enum):
     AVAILABLE = "available"
