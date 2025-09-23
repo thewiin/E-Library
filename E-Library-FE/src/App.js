@@ -10,6 +10,7 @@ import MainLayout from "./layouts/MainLayout";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/Auth/SignUp";
 import Home from "./pages/Home";
+import Borrow from "./pages/Borrow";
 
 function ProtectedRoutes({ user, requiredRoles, isLoading }) {
   if (isLoading) return <div>Loading...</div>;
@@ -97,6 +98,19 @@ function App() {
                   path="/admin/users"
                   element={<h2>Quản lý người dùng</h2>}
                 />
+              </Route>
+
+              {/* Route cho reader */}
+              <Route
+                element={
+                  <ProtectedRoutes
+                    user={user}
+                    requiredRoles={["READER"]}
+                    isLoading={isLoading}
+                  />
+                }
+              >
+                <Route path="/books/borrow" element={<Borrow />} />
               </Route>
             </Route>
 
