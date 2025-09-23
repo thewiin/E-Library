@@ -5,7 +5,10 @@ auth_bp = Blueprint("auth", __name__)
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
-    data = request.get_json()
+    # Dữ liệu từ form
+    data = request.form
+    avatar_file = request.files.get("avatar")
+
     user = AuthService.register(
         email=data["email"],
         password=data["password"],
@@ -13,9 +16,11 @@ def register():
         last_name=data["last_name"],
         dob=data.get("dob"),
         gender=data.get("gender"),
-        role=data.get("role")
+        role=data.get("role"),
+        avatar_file=avatar_file
     )
     return jsonify(user.to_dict()), 201
+
 
 @auth_bp.route("/login", methods=["POST"])
 def login():

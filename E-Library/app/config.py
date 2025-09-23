@@ -3,6 +3,7 @@ import os
 class Config:
     # Lấy secret key từ biến môi trường (hoặc default)
     SECRET_KEY = os.getenv("SECRET_KEY", "dev_key")
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "dev_key")
 
     # Cấu hình database MySQL
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
