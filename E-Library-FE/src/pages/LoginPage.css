@@ -38,28 +38,34 @@
     align-items: center;
     border-radius: 12px;
     width: 100%;
+    gap: 80px; /* Tăng khoảng cách giữa form và ảnh */
 }
 
-/* Form Container */
+/* Form Container - Thêm khung và padding */
 .login-form-container {
-    flex: 0 0 60%;
+    flex: 0 0 55%; /* Giảm width form để tạo khoảng cách */
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
 }
 
 /* Tiêu đề "Login" trong form */
-.auth-form h2.login-form-title { /* Nếu AuthForm của bạn render <h2> */
-    font-size: 28px;
+.auth-form-title {
+    font-size: 32px;
     font-weight: 600;
     margin-bottom: 30px;
     color: #212529;
-    text-align: left; /* Căn lề trái */
+    text-align: center;
 }
 
-/* Các trường input */
-.form-group { /* Nếu AuthForm của bạn có class form-group */
-    margin-bottom: 20px;
+/* Các trường input - Thêm style cho khung input */
+.auth-form .mb-3 {
+    margin-bottom: 25px;
 }
 
-.form-group label {
+.auth-form .form-label {
     display: block;
     font-size: 16px;
     font-weight: 500;
@@ -68,58 +74,83 @@
     text-align: left;
 }
 
-.form-group input {
+.auth-form .form-control {
     width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
+    padding: 14px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
     font-size: 16px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
 }
 
-.form-group input::placeholder {
+.auth-form .form-control:focus {
+    border-color: #6a8cff;
+    background-color: white;
+    box-shadow: 0 0 0 0.2rem rgba(106, 140, 255, 0.25);
+    outline: none;
+}
+
+.auth-form .form-control::placeholder {
     color: #adb5bd;
 }
 
 /* Nút Login */
-.auth-form button.login-btn,
-.auth-form button[type="submit"] { /* Cả hai cách nếu AuthForm của bạn tạo nút */
+.auth-form button[type="submit"] {
     width: 100%;
     padding: 14px;
-    background-color: #6a8cff; /* Màu xanh của nút */
+    background-color: #6a8cff;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.2s ease-in-out;
+    margin-top: 10px;
+    transition: all 0.3s ease;
 }
 
-.auth-form button.login-btn:hover,
-.auth-form button[type="submit"]:hover {
+.auth-form button[type="submit"]:hover:not(:disabled) {
     background-color: #5575e7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(106, 140, 255, 0.3);
+}
+
+.auth-form button[type="submit"]:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Alert thông báo lỗi */
+.alert-danger {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 20px;
+    color: #721c24;
+    font-size: 14px;
 }
 
 /* Phần "Don't have an account?" */
-.login-signup-text,
-.auth-form p {
+.auth-form-footer {
     text-align: center;
     margin-top: 25px;
     font-size: 15px;
     color: #6c757d;
 }
 
-.login-signup-text a,
-.auth-form p a {
+.auth-form-footer a {
     color: #6a8cff;
     text-decoration: none;
     font-weight: 600;
+    transition: color 0.3s ease;
 }
 
-.login-signup-text a:hover,
-.auth-form p a:hover {
+.auth-form-footer a:hover {
+    color: #5575e7;
     text-decoration: underline;
 }
 
@@ -128,18 +159,58 @@
     flex: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .login-illustration-image {
-    max-width: 450px; 
+    max-width: 500px; /* Tăng kích thước ảnh */
     width: 100%; 
     height: auto;
     display: block;
     pointer-events: none;
     user-select: none;
+    border-radius: 12px;
 }
 
-.auth-form {
-  padding: 0; /* Loại bỏ padding mặc định nếu có */
-  box-shadow: none; /* Loại bỏ shadow nếu có */
+/* Responsive design */
+@media (max-width: 1024px) {
+    .login-content-wrapper {
+        gap: 50px;
+    }
+    
+    .login-form-container {
+        flex: 0 0 60%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-content-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .login-form-container {
+        flex: none;
+        width: 100%;
+        order: 2;
+    }
+    
+    .login-illustration-container {
+        order: 1;
+    }
+    
+    .login-illustration-image {
+        max-width: 300px;
+    }
+    
+    .app-title {
+        font-size: 36px;
+    }
+    
+    .login-header-logo {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
 }

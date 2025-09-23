@@ -10,7 +10,8 @@ class RoleEnum(enum.Enum):
     READER = "reader"
     LIBRARIAN = "librarian"
 
-class BookStatusEnum(enum.Enum):
-    AVAILABLE = "available"
-    BORROWED = "borrowed"
-    LOST = "lost"
+class BorrowStatus(enum.Enum):
+    BORROWED = "borrowed"      # Đang mượn
+    RETURNED = "returned"      # Đã trả đúng hạn
+    OVERDUE = "overdue"        # Quá hạn chưa trả
+    RETURNED_LATE = "returned_late"  # Trả muộn

@@ -12,7 +12,7 @@ def get_books():
         "author": request.args.get("author"),
         "category_id": request.args.get("category_id", type=int),
         "page": request.args.get("page", type=int, default=1),
-        "per_page": request.args.get("per_page", type=int, default=10),
+        "per_page": request.args.get("per_page", type=int, default=5),
     }
     result = BookService.get_books(filters)
     return jsonify({

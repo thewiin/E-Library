@@ -5,6 +5,14 @@ from app.utils import token_required, roles_required
 
 user_bp = Blueprint("user", __name__)
 
+@user_bp.route("/profile", methods=["GET"])
+@token_required
+def get_profile(current_user):
+    """
+    Lấy thông tin profile của user đang đăng nhập
+    """
+    return jsonify(current_user.to_dict()), 200
+
 @user_bp.route("/<int:user_id>", methods=["PUT"])
 @token_required
 def update_user(current_user, user_id):
