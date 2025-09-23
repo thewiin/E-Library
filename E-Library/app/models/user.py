@@ -23,6 +23,8 @@ class User(db.Model):
     gender = db.Column(Enum(GenderEnum), nullable=True)
     role = db.Column(Enum(RoleEnum), default=RoleEnum.READER, nullable=False)
 
+    avatar = db.Column(db.String(255), nullable=True)
+
     is_active = db.Column(db.Boolean, default=True, nullable=False)
 
     created_date = db.Column(db.DateTime, server_default=func.now(), nullable=False)
@@ -31,6 +33,7 @@ class User(db.Model):
     # Quan hệ 1-1
     reader = db.relationship("Reader", back_populates="user", uselist=False, cascade="all, delete-orphan")
     admin = db.relationship("Admin", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    librarian = db.relationship("Librarian", back_populates="user", uselist=False, cascade="all, delete-orphan")
 
     # ----------------- VALIDATION / NORMALIZATION -----------------
     @validates("email")
@@ -53,9 +56,8 @@ class User(db.Model):
     def full_name(self) -> str:
         return f"{self.first_name} {self.last_name}".strip()
 
-    def jwt_identity(self) -> dict:
-        """Dữ liệu nhúng vào JWT (tối giản)."""
-        return {"id": self.id, "role": self.role.value if self.role else None}
+    def jwt_identity(self):
+        return str(self.id)
 
     # ----------------- SERIALIZATION -----------------
     def to_dict(self):
@@ -67,6 +69,7 @@ class User(db.Model):
             "dob": self.dob.isoformat() if self.dob else None,
             "gender": self.gender.value if self.gender else None,
             "role": self.role.value if self.role else None,
+            "avatar": self.avatar,
             "is_active": self.is_active,
             "created_date": self.created_date.isoformat() if self.created_date else None,
             "updated_date": self.updated_date.isoformat() if self.updated_date else None,

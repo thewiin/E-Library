@@ -1,45 +1,71 @@
+import cloudinary.uploader
 from app.models import Book
 from app.repository.book_repository import BookRepository
 
 class BookService:
     @staticmethod
-    def get_books():
-        return BookRepository.get_all()
+    def get_books(filters=None):
+        return BookRepository.get_books(filters)
 
     @staticmethod
-    def get_book(book_id):
+    def get_by_id(book_id):
         return BookRepository.get_by_id(book_id)
 
     @staticmethod
-    def create_book(title, author=None, description=None, image=None,
-                    so_luong=0, publisher=None, published_year=None, isbn=None, category_ids=None):
+    def create_book(title, author=None, description=None, so_luong=0, category_ids=None, image_file=None):
+        # Upload ảnh nếu có
+        image_url = None
+        if image_file:
+            upload_result = cloudinary.uploader.upload(image_file)
+            image_url = upload_result.get("secure_url")
+
         book = Book(
             title=title,
             author=author,
             description=description,
-            image=image,
             so_luong=so_luong,
-            publisher=publisher,
-            published_year=published_year,
-            isbn=isbn,
+            image=image_url
         )
+
+        # Thêm categories
         if category_ids:
-            book.categories = BookRepository.get_categories_by_ids(category_ids)
+            categories = BookRepository.get_categories_by_ids(category_ids)
+            book.categories = categories
 
         return BookRepository.save(book)
 
     @staticmethod
-    def update_book(book_id, **kwargs):
+    def update_book(book_id, title=None, author=None, description=None, so_luong=None, category_ids=None,
+                    image_file=None):
         book = BookRepository.get_by_id(book_id)
         if not book:
             return None
 
-        for key, value in kwargs.items():
-            if hasattr(book, key):
-                setattr(book, key, value)
+        # Validation cơ bản
+        if so_luong is not None and so_luong < 0:
+            so_luong = 0
 
-        if "category_ids" in kwargs and kwargs["category_ids"]:
-            book.categories = BookRepository.get_categories_by_ids(kwargs["category_ids"])
+        if title:
+            book.title = title.strip()
+        if author:
+            book.author = author.strip()
+        if description:
+            book.description = description.strip()
+        if so_luong is not None:
+            book.so_luong = so_luong
+
+        # Upload ảnh mới
+        if image_file:
+            # Kiểm tra định dạng ảnh
+            if image_file.filename == '':
+                return None  # hoặc xử lý lỗi
+            upload_result = cloudinary.uploader.upload(image_file)
+            book.image = upload_result.get("secure_url")
+
+        # Cập nhật categories
+        if category_ids is not None:
+            categories = BookRepository.get_categories_by_ids(category_ids)
+            book.categories = categories
 
         return BookRepository.save(book)
 
