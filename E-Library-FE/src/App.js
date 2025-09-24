@@ -10,6 +10,7 @@ import MainLayout from "./layouts/MainLayout";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/Auth/SignUp";
 import Home from "./pages/Home";
+import BookManagementPage from './pages/BookManagementPage/BookManagementPage';
 
 function ProtectedRoutes({ user, requiredRoles, isLoading }) {
   if (isLoading) return <div>Loading...</div>;
@@ -92,7 +93,7 @@ function App() {
                   />
                 }
               >
-                <Route path="/admin/books" element={<h2>Quản lý sách</h2>} />
+                <Route path="/admin/books" element={<h2><BookManagementPage /> Quản lý sách</h2>} />
                 <Route
                   path="/admin/users"
                   element={<h2>Quản lý người dùng</h2>}
@@ -105,6 +106,7 @@ function App() {
 
             {/* Route 404 */}
             <Route path="*" element={<h2>404 - Page Not Found</h2>} />
+            
           </Routes>
         </div>
       </MyDispatchContext.Provider>
